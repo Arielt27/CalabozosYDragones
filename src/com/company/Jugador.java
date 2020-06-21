@@ -10,7 +10,7 @@ public class Jugador
     int potion = 0;
     int exp = 0;
     int dammage = 0;
-    int maxDefense = 50;
+    int maxDefense = 20;
     int defense = 0;
 
 
@@ -87,21 +87,29 @@ public class Jugador
 
 
     // METODOS
+    public void avanzar()
+    {
+
+    }
+
     public void pickUpPotion()
     {
         potion = potion + 1;
-        System.out.println("Tienes " + potion + " pociones");
     }
 
     public void Heal()
     {
         if(health == 100)
         {
-            System.out.println("Ya tienes tu salud maxima");
+            System.out.println("Ya tienes el maximo de salud");
         }
         else{
             health = health + 20;
-            System.out.println("Salud: " + health);
+            if(health > 100)
+            {
+                health = 100;
+                potion = potion - 1;
+            }
         }
     }
 
@@ -114,8 +122,6 @@ public class Jugador
 
     public int Defend()
     {
-        defense = maxDefense;
-
         return defense;
     }
 }

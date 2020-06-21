@@ -48,12 +48,13 @@ public class Main
 
 
         // MAIN
-        System.out.println("****CALABOZOS Y DRAGONES****");
-        System.out.println("*1- Iniciar Juego          *");
-        System.out.println("*2- Instrucciones          *");
-        System.out.println("*3- Salir                  *");
-        System.out.println("****************************");
-        System.out.print("Opc: ");
+        System.out.println(" ");
+        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t****CALABOZOS Y DRAGONES****");
+        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t*1- Iniciar Juego          *");
+        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t*2- Instrucciones          *");
+        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t*3- Salir                  *");
+        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t****************************");
+        System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tOpc: ");
         opc = lector.nextInt();
 
         // Ciclo While para que el juego se ejecute infinitamente
@@ -67,22 +68,20 @@ public class Main
                 case 1: // INICIAR JUEGO
 
                     System.out.println(" ");
-                    System.out.println("\t***CALABOZOS Y DRAGONES***");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t****CALABOZOS Y DRAGONES****");
+
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  ¡Bienvenido al Calabozo!");
+                    System.out.println(" ");
 
                     boolean running = true;
 
                     while(running)
                     {
                         System.out.println(" ");
-
-                        System.out.println("\t ¡Bienvenido al Calabozo!");
-                        System.out.println(" ");
-
                         System.out.println("Tu salud es: " + Player.getHealth() + "%");
                         System.out.println("Tienes: " + Player.getPotion() + " pociones");
                         System.out.print("¿Que haces? ");
                         action = lector.next();
-
                         System.out.println(" ");
 
                         // ACCIONES QUE EL JUGADOR EJECUTA
@@ -91,7 +90,6 @@ public class Main
                         if(action.equals(look))
                         {
                             dungeon.verHabitacion();
-                            System.out.println(" ");
                         }
 
                         // RECOGER POCION
@@ -108,9 +106,6 @@ public class Main
                                 int totalPotion = playerPotion + dungeonPotion;
 
                                 Player.setPotion(totalPotion);
-                                System.out.println("Tienes: " + Player.getPotion() + " pociones");
-
-                                System.out.println(" ");
                             }
                         }
 
@@ -124,20 +119,42 @@ public class Main
                             else{
                                 Player.Heal();
                             }
-                            System.out.println(" ");
                         }
 
                         // ATACAR
                         if(action.equals(attack))
                         {
-                            System.out.println(" ");
+                            int ataque = Calabozo.Enemigo1.Atacar();
+                            int playerMaxHealth = Player.getHealth();
+                            int calculoDaño = playerMaxHealth - ataque;
+                            Player.setHealth(calculoDaño);
+
+                            System.out.println("El daño recibido es: " + ataque);
+                            System.out.println("Tu salud es: " + Player.getHealth() + "%");
                         }
 
                         // DEFENDER
                         if(action.equals(defend))
                         {
-                            Player.Defend();
-                            System.out.println(" ");
+                            int defensa = Player.Defend();
+                            int ataque = 6;//Calabozo.Enemigo1.Atacar();
+                            int calculoDefensa = defensa - ataque;
+
+                            if(calculoDefensa <= 0)
+                            {
+                                calculoDefensa = 0;
+                            }
+
+                            Player.setDefense(calculoDefensa);
+
+                            if(defensa == 0)
+                            {
+                                System.out.println("Ya no tienes puntos de defensa");
+                            }else{
+                                System.out.println("Ataque recibido: " + ataque);
+                                System.out.println("Defensa: " + calculoDefensa);
+                                System.out.println(" ");
+                            }
                         }
 
                         // CODIGO SI EL JUGADOR NO INGRESA UN COMANDO VALIDO
@@ -153,17 +170,17 @@ public class Main
                         if(action.equals(help))
                         {
                             System.out.println(" ");
-                            System.out.println("Comandos: ");
-                            System.out.println("mirar");
-                            System.out.println("avanzar");
-                            System.out.println("retroceder");
-                            System.out.println("derecha");
-                            System.out.println("izquierda");
-                            System.out.println("recoger");
-                            System.out.println("curarse");
-                            System.out.println("atacar");
-                            System.out.println("defender");
-                            System.out.println("salir");
+                            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  COMANDOS: ");
+                            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   mirar");
+                            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   avanzar");
+                            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   retroceder");
+                            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   derecha");
+                            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   izquierda");
+                            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   recoger");
+                            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   curarse");
+                            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   atacar");
+                            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   defender");
+                            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   salir");
                             System.out.println(" ");
                         }
 
@@ -175,12 +192,12 @@ public class Main
                     }
 
                     System.out.println(" ");
-                    System.out.println("****CALABOZOS Y DRAGONES****");
-                    System.out.println("*1- Iniciar Juego          *");
-                    System.out.println("*2- Instrucciones          *");
-                    System.out.println("*3- Salir                  *");
-                    System.out.println("****************************");
-                    System.out.print("Opc: ");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t****CALABOZOS Y DRAGONES****");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t*1- Iniciar Juego          *");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t*2- Instrucciones          *");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t*3- Salir                  *");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t****************************");
+                    System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tOpc: ");
                     opc = lector.nextInt();
 
                     break;
@@ -188,27 +205,27 @@ public class Main
                 case 2: // INSTRUCCIONES
 
                     System.out.println(" ");
-                    System.out.println("****CALABOZOS Y DRAGONES****");
-                    System.out.println("Comandos: ");
-                    System.out.println("mirar:      muestra descripción del cuarto actual, cantidad de enemigos y pociones.");
-                    System.out.println("avanzar:    sale del cuarto por la salida norte y entra a un nuevo cuarto.");
-                    System.out.println("retroceder: sale del cuarto por la salida sur y entra a un nuevo cuarto.");
-                    System.out.println("derecha:    sale del cuarto por la salida este y entra a un nuevo cuarto.");
-                    System.out.println("izquierda:  sale del cuarto por la salida oeste y entra a un nuevo cuarto.");
-                    System.out.println("recoger:    recoge una pocion.");
-                    System.out.println("curarse:    tomar pocion para restaurar 20 puntos de salud");
-                    System.out.println("atacar:     atacar al enemigo.");
-                    System.out.println("defender:   bloquear ataques enemigos por un turno.");
-                    System.out.println("salir:      sale al menu principal del juego");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t****CALABOZOS Y DRAGONES****");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  Comandos: ");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\tmirar:      muestra descripción del cuarto actual, cantidad de enemigos y pociones.");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\tavanzar:    sale del cuarto por la salida norte y entra a un nuevo cuarto.");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\tretroceder: sale del cuarto por la salida sur y entra a un nuevo cuarto.");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\tderecha:    sale del cuarto por la salida este y entra a un nuevo cuarto.");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\tizquierda:  sale del cuarto por la salida oeste y entra a un nuevo cuarto.");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\trecoger:    recoge una pocion.");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\tcurarse:    tomar pocion para restaurar 20 puntos de salud.");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\tatacar:     atacar al enemigo.");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\tdefender:   bloquear ataques enemigos por un turno.");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\tsalir:      sale al menu principal del juego.");
 
                     System.out.println(" ");
 
-                    System.out.println("****CALABOZOS Y DRAGONES****");
-                    System.out.println("*1- Iniciar Juego          *");
-                    System.out.println("*2- Instrucciones          *");
-                    System.out.println("*3- Salir                  *");
-                    System.out.println("****************************");
-                    System.out.print("Opc: ");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t****CALABOZOS Y DRAGONES****");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t*1- Iniciar Juego          *");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t*2- Instrucciones          *");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t*3- Salir                  *");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t****************************");
+                    System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tOpc: ");
                     opc = lector.nextInt();
 
                     break;
@@ -216,6 +233,6 @@ public class Main
         }
 
         System.out.println(" ");
-        System.out.println("\t Gracias por Jugar.");
+        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t ¡Gracias por Jugar!");
     }
 }

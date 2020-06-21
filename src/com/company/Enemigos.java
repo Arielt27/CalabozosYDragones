@@ -5,6 +5,7 @@ import java.util.Random;
 public class Enemigos
 {
     // ATRIBUTOS
+    private int prob = 0;
     private String type;
     private int maxHealth = 0;
     private int health = 0;
@@ -70,15 +71,22 @@ public class Enemigos
     // METODOS
     public int Atacar()
     {
-        dammage = Main.rnd.nextInt(10);
+        prob = Main.rnd.nextInt(2);
+
+        if(prob == 1)
+        {
+            dammage = Main.rnd.nextInt(10);
+        }else{
+            dammage = 0;
+            System.out.println("El enemigo no ataco");
+        }
 
         return dammage;
     }
 
     public int dropPotion()
     {
-        int prob = rnd.nextInt(2);
-
+        prob = Main.rnd.nextInt(2);
         if(prob == 1)
         {
             potion = 1;

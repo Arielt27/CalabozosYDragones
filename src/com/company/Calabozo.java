@@ -17,7 +17,7 @@ public class Calabozo
 
 
     // LISTAS
-    private static Enemigos[] enemigos = new Enemigos[5];
+    private static Enemigos[] enemigos = new Enemigos[7];
 
 
     // OBJETOS
@@ -85,7 +85,7 @@ public class Calabozo
     // METODOS
     public void verHabitacion()
     {
-        System.out.println("Estas en la habitacion " + habitacion);
+        System.out.println("Estas en el cuarto " + habitacion);
         System.out.println("Hay " + potion + " pociones");
         System.out.println("Hay un " + Enemy1.getType() + " con " + Enemy1.getMaxHealth() + "% de salud");
         System.out.println("Hay un " + Enemy2.getType() + " con " + Enemy2.getMaxHealth() + "% de salud");
