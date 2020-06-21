@@ -5,16 +5,19 @@ import java.util.Random;
 public class Calabozo
 {
     // ATRIBUTOS
-    public static String Dragon = "dragon";
-    public static String Esqueleto = "esqueleto";
-    public static String Zombie = "zombie";
-    public static String Guerrero = "guerrero";
-    public static String Asesino = "asesino";
+    private static int potion = 0;
+    private static int habitacion = 0;
+    private static Enemigos Enemy1;
+    private static Enemigos Enemy2;
+    private static String Dragon = "dragon";
+    private static String Esqueleto = "esqueleto";
+    private static String Zombie = "zombie";
+    private static String Guerrero = "guerrero";
+    private static String Asesino = "asesino";
 
 
     // LISTAS
-    public static int[] Cuartos = new int[40];
-    public static Enemigos[] enemigos = new Enemigos[5];
+    private static Enemigos[] enemigos = new Enemigos[5];
 
 
     // OBJETOS
@@ -38,16 +41,54 @@ public class Calabozo
         enemigos[3] = Enemigo4;
         enemigos[4] = Enemigo5;
 
-        for(int i = 0; i<Cuartos.length-1; i++)
-        {
-            
-        }
+        Enemy1 = enemigos[rnd.nextInt(4)];
+        Enemy2 = enemigos[rnd.nextInt(4)];
+
+        habitacion = rnd.nextInt(40);
+
+        potion = rnd.nextInt(2);
     }
 
 
     // GET y SET
+    public static int getPotion()
+    {
+        return potion;
+    }
+
+    public static void setPotion(int potion)
+    {
+        Calabozo.potion = potion;
+    }
+
+    public static Enemigos getEnemy1()
+    {
+        return Enemy1;
+    }
+
+    public static void setEnemy1(Enemigos enemy1)
+    {
+        Enemy1 = enemy1;
+    }
+
+    public static Enemigos getEnemy2()
+    {
+        return Enemy2;
+    }
+
+    public static void setEnemy2(Enemigos enemy2)
+    {
+        Enemy2 = enemy2;
+    }
 
 
     // METODOS
+    public void verHabitacion()
+    {
+        System.out.println("Estas en la habitacion " + habitacion);
+        System.out.println("Hay " + potion + " pociones");
+        System.out.println("Hay un " + Enemy1.getType() + " con " + Enemy1.getMaxHealth() + "% de salud");
+        System.out.println("Hay un " + Enemy2.getType() + " con " + Enemy2.getMaxHealth() + "% de salud");
+    }
 
 }

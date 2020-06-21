@@ -9,7 +9,7 @@ public class Enemigos
     private int maxHealth = 0;
     private int health = 0;
     private int dammage = 0;
-    private boolean potion = true;
+    private int potion = 0;
 
 
     // OBJETOS
@@ -21,6 +21,7 @@ public class Enemigos
     {
         type = tipoEnemigo;
         maxHealth = rnd.nextInt(20);
+        health = maxHealth;
     }
 
 
@@ -74,6 +75,17 @@ public class Enemigos
         return dammage;
     }
 
+    public int dropPotion()
+    {
+        int prob = rnd.nextInt(2);
 
+        if(prob == 1)
+        {
+            potion = 1;
+        }else{
+            potion = 0;
+        }
 
+        return potion;
+    }
 }

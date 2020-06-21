@@ -5,17 +5,20 @@ import java.util.ArrayList;
 public class Jugador
 {
     // ATRIBUTOS
-    int maxHealth = 0;
+    int maxHealth = 100;
     int health = 0;
     int potion = 0;
     int exp = 0;
     int dammage = 0;
+    int maxDefense = 50;
+    int defense = 0;
 
 
     // CONSTRUCTOR
     public Jugador()
     {
-        maxHealth = 100;
+        health = maxHealth;
+        defense = maxDefense;
         potion = 3;
         exp = 0;
     }
@@ -72,18 +75,47 @@ public class Jugador
         this.dammage = dammage;
     }
 
+    public int getDefense()
+    {
+        return defense;
+    }
+
+    public void setDefense(int defense)
+    {
+        this.defense = defense;
+    }
+
 
     // METODOS
-    public int Atacar()
+    public void pickUpPotion()
+    {
+        potion = potion + 1;
+        System.out.println("Tienes " + potion + " pociones");
+    }
+
+    public void Heal()
+    {
+        if(health == 100)
+        {
+            System.out.println("Ya tienes tu salud maxima");
+        }
+        else{
+            health = health + 20;
+            System.out.println("Salud: " + health);
+        }
+    }
+
+    public int Attack()
     {
         dammage = Main.rnd.nextInt(15);
 
         return dammage;
     }
 
+    public int Defend()
+    {
+        defense = maxDefense;
 
-
-
-
-
+        return defense;
+    }
 }
