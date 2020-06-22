@@ -7,6 +7,7 @@ public class Calabozo
     // ATRIBUTOS
     private static int potion = 0;
     private static int habitacion = 0;
+    private static int habitacionAnterior;
     private static Enemigos Enemy1;
     private static Enemigos Enemy2;
     private static String Dragon = "dragon";
@@ -17,7 +18,7 @@ public class Calabozo
 
 
     // LISTAS
-    private static Enemigos[] enemigos = new Enemigos[7];
+    public static Enemigos[] enemigos = new Enemigos[7];
 
 
     // OBJETOS
@@ -41,16 +42,24 @@ public class Calabozo
         enemigos[3] = Enemigo4;
         enemigos[4] = Enemigo5;
 
+        potion = rnd.nextInt(2);
+        habitacion = rnd.nextInt(40);
         Enemy1 = enemigos[rnd.nextInt(4)];
         Enemy2 = enemigos[rnd.nextInt(4)];
-
-        habitacion = rnd.nextInt(40);
-
-        potion = rnd.nextInt(2);
     }
 
 
     // GET y SET
+    public static int getHabitacion()
+    {
+        return habitacion;
+    }
+
+    public static void setHabitacion(int habitacion)
+    {
+        Calabozo.habitacion = habitacion;
+    }
+
     public static int getPotion()
     {
         return potion;
@@ -85,10 +94,95 @@ public class Calabozo
     // METODOS
     public void verHabitacion()
     {
+        int prob = 0;
+        int prob2 = 0;
+        prob = Main.rnd.nextInt(2);
+        prob2 = Main.rnd.nextInt(2);
+
         System.out.println("Estas en el cuarto " + habitacion);
         System.out.println("Hay " + potion + " pociones");
-        System.out.println("Hay un " + Enemy1.getType() + " con " + Enemy1.getMaxHealth() + "% de salud");
-        System.out.println("Hay un " + Enemy2.getType() + " con " + Enemy2.getMaxHealth() + "% de salud");
+
+        if(prob == 1)
+        {
+            System.out.println("Hay un " + Enemy1.getType() + " con " + Enemy1.getMaxHealth() + "% de salud");
+        }
+
+        if(prob2 == 1)
+        {
+            System.out.println("Hay un " + Enemy2.getType() + " con " + Enemy2.getMaxHealth() + "% de salud");
+        }
+
+        if((prob == 0) & (prob2 == 0))
+        {
+            System.out.println("No hay enemigos en esta habitación");
+        }
     }
 
+    public void avanzar()
+    {
+        habitacionAnterior = habitacion;
+
+        int nuevahabitacion = Main.rnd.nextInt(40);
+
+        if(nuevahabitacion == habitacionAnterior)
+        {
+            nuevahabitacion = Main.rnd.nextInt(40);
+        }
+        else if(nuevahabitacion == habitacion)
+        {
+            nuevahabitacion = Main.rnd.nextInt(40);
+        }else{
+            habitacion = nuevahabitacion;
+            potion = rnd.nextInt(2);
+            Enemy1 = enemigos[rnd.nextInt(4)];
+            Enemy2 = enemigos[rnd.nextInt(4)];
+        }
+    }
+
+    public void retroceder()
+    {
+        int nuevahabitacion = habitacionAnterior;
+    }
+
+    public void derecha()
+    {
+        habitacionAnterior = habitacion;
+
+        int nuevahabitacion = Main.rnd.nextInt(40);
+
+        if(nuevahabitacion == habitacionAnterior)
+        {
+            nuevahabitacion = Main.rnd.nextInt(40);
+        }
+        else if(nuevahabitacion == habitacion)
+        {
+            nuevahabitacion = Main.rnd.nextInt(40);
+        }else{
+            habitacion = nuevahabitacion;
+            potion = rnd.nextInt(2);
+            Enemy1 = enemigos[rnd.nextInt(4)];
+            Enemy2 = enemigos[rnd.nextInt(4)];
+        }
+    }
+
+    public void izquierda()
+    {
+        habitacionAnterior = habitacion;
+
+        int nuevahabitacion = Main.rnd.nextInt(40);
+
+        if(nuevahabitacion == habitacionAnterior)
+        {
+            nuevahabitacion = Main.rnd.nextInt(40);
+        }
+        else if(nuevahabitacion == habitacion)
+        {
+            nuevahabitacion = Main.rnd.nextInt(40);
+        }else{
+            habitacion = nuevahabitacion;
+            potion = rnd.nextInt(2);
+            Enemy1 = enemigos[rnd.nextInt(4)];
+            Enemy2 = enemigos[rnd.nextInt(4)];
+        }
+    }
 }

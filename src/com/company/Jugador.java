@@ -87,11 +87,6 @@ public class Jugador
 
 
     // METODOS
-    public void avanzar()
-    {
-
-    }
-
     public void pickUpPotion()
     {
         potion = potion + 1;

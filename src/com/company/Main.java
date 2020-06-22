@@ -92,6 +92,30 @@ public class Main
                             dungeon.verHabitacion();
                         }
 
+                        // AVANZAR
+                        if(action.equals(forward))
+                        {
+                            dungeon.avanzar();
+                        }
+
+                        // RETROCEDER
+                        if(action.equals(back))
+                        {
+                            dungeon.retroceder();
+                        }
+
+                        // DERECHA
+                        if(action.equals(right))
+                        {
+                            dungeon.derecha();
+                        }
+
+                        // IZQUIERDA
+                        if(action.equals(left))
+                        {
+                            dungeon.izquierda();
+                        }
+
                         // RECOGER POCION
                         if(action.equals(pick))
                         {
@@ -124,20 +148,85 @@ public class Main
                         // ATACAR
                         if(action.equals(attack))
                         {
-                            int ataque = Calabozo.Enemigo1.Atacar();
-                            int playerMaxHealth = Player.getHealth();
-                            int calculoDaño = playerMaxHealth - ataque;
-                            Player.setHealth(calculoDaño);
+                            // JUGADOR ATACA
 
-                            System.out.println("El daño recibido es: " + ataque);
-                            System.out.println("Tu salud es: " + Player.getHealth() + "%");
+                            int atkPlayer = Player.Attack();
+                            int healtEnemy = Calabozo.getEnemy1().getHealth();
+                            int enemyHealth = healtEnemy - atkPlayer;
+
+                            while(enemyHealth > 0)
+                            {
+                                System.out.println("Atacas al " + Calabozo.getEnemy1().getType() + " y le haces " + atkPlayer + " de daño");
+
+                                if(enemyHealth < 0)
+                                {
+                                    int expActual = Player.getExp();
+                                    int expObtenida = rnd.nextInt(10);
+                                    int expTotal = expActual + expObtenida;
+                                    Player.setExp(expTotal);
+
+                                    int pocionesCalabozo = Calabozo.getPotion();
+                                    int dropPocion = Calabozo.getEnemy1().dropPotion();
+
+                                    if(dropPocion == 1)
+                                    {
+                                        int totalPocionesCalabozo = pocionesCalabozo + dropPocion;
+                                        System.out.println("El enemigo solto " + totalPocionesCalabozo + " pocion");
+                                    }
+
+                                    System.out.println("Enemigo Derrotado");
+                                    System.out.println("Experiencia obtenida: " + expObtenida);
+                                }
+
+                                // ENEMIGO ATACA
+                                int ataqueEnemigo = Calabozo.getEnemy1().Atacar();
+                                int playerMaxHealth = Player.getHealth();
+                                int calculoDaño = playerMaxHealth - ataqueEnemigo;
+                                Player.setHealth(calculoDaño);
+
+                                System.out.println("El daño recibido es: " + ataqueEnemigo);
+                                System.out.println("Tu salud es: " + Player.getHealth() + "%");
+
+
+
+                                System.out.print("¿Que haces? ");
+                                action = lector.next();
+                                System.out.println(" ");
+
+                                // ACTION ADELANTA BLOQUEADA
+                                if(action.equals(forward))
+                                {
+                                    System.out.println("No puedes moverte en medio de una batalla");
+                                }
+
+                                // ACTION RETROCEDER BLOQUEADA
+                                if(action.equals(back))
+                                {
+                                    System.out.println("No puedes moverte en medio de una batalla");
+                                }
+
+                                // ACTION DERECHA BLOQUEADA
+                                if(action.equals(right))
+                                {
+                                    System.out.println("No puedes moverte en medio de una batalla");
+                                }
+
+                                // ACTION IZQUIERDA BLOQUEADA
+                                if(action.equals(left))
+                                {
+                                    System.out.println("No puedes moverte en medio de una batalla");
+                                }
+                            }
+
+
+                            //int ataque2 = Calabozo.getEnemy2().Atacar();
                         }
 
                         // DEFENDER
                         if(action.equals(defend))
                         {
                             int defensa = Player.Defend();
-                            int ataque = 6;//Calabozo.Enemigo1.Atacar();
+                            int ataque = Calabozo.Enemigo1.Atacar();
                             int calculoDefensa = defensa - ataque;
 
                             if(calculoDefensa <= 0)
@@ -158,11 +247,13 @@ public class Main
                         }
 
                         // CODIGO SI EL JUGADOR NO INGRESA UN COMANDO VALIDO
-                        /*if(action != look && action != forward && action != back && action != left && action != right && action != pick && action != attack && action != defend && action != heal)
+                        /*if((action != look) & (action != forward) & (action != back) & (action != left) & (action != right) & (action != pick) & (action != attack) & (action != defend) & (action != heal))
                         {
                             System.out.println(" ");
                             System.out.println("\t\t\t\t\t*Comando no encontrado*");
                             System.out.println("\t*Escribe 'ayuda' para consultar los comandos del juego*");
+                            System.out.println(" ");
+                        }else{
                             System.out.println(" ");
                         }*/
 
